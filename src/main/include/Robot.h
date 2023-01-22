@@ -121,6 +121,23 @@ class Robot : public frc::TimedRobot {
                 cv::Point(c.x + ll, c.y), cv::FONT_HERSHEY_SIMPLEX, 1,
                 crossColor, 3);
 
+        if ( c.x < 320 ) {
+          putText(mat, "Move Left", cv::Point(480, 240), cv::FONT_HERSHEY_SIMPLEX, 1,
+                crossColor, 3);
+        }
+        if ( c.x > 320 ) {
+          putText(mat, "Move Right", cv::Point(0, 240), cv::FONT_HERSHEY_SIMPLEX, 1,
+                crossColor, 3);
+        }
+        if ( c.y < 240 ) {
+          putText(mat, "Move Up", cv::Point(310, 20), cv::FONT_HERSHEY_SIMPLEX, 1,
+                crossColor, 3);
+        }
+        if ( c.y > 240 ) {
+          putText(mat, "Move Down", cv::Point(310, 460), cv::FONT_HERSHEY_SIMPLEX, 1,
+                crossColor, 3);
+        }
+
         // determine pose
         frc::Transform3d pose = estimator.Estimate(*detection);
 
@@ -135,7 +152,8 @@ class Robot : public frc::TimedRobot {
                         << units::angle::to_string(rotation.Y()) << ", "
                         << units::angle::to_string(rotation.Z());
         frc::SmartDashboard::PutString(
-            "pose_" + std::to_string(detection->GetId()),
+            //"pose_" + std::to_string(detection->GetId()),
+            "pose",
             dashboardString.str());
       }
 
